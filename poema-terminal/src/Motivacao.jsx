@@ -1,44 +1,31 @@
 import { useEffect, useState } from 'react';
 
-const motivacao = [
-  "rafaela@stellantis:~$ cd sonhos",
-  "rafaela@stellantis:~/sonhos$ cat motivacao.txt",
-  "Desde que conheci a Stellantis, me encantei com seu impacto global e visão de futuro.",
-  "Vejo uma empresa que lidera a inovação em mobilidade inteligente e sustentável.",
-  "Admiro os softwares embarcados, a aplicação de IA em veículos autônomos e a excelência tecnológica.",
-  "Mas também admiro os valores: inclusão, sustentabilidade e responsabilidade social.",
-  "Vi ações sociais reais, projetos ambientais e investimentos no futuro do planeta.",
-  "Isso conversa diretamente com a Rafaela que liderou voluntariados e sempre quis transformar o mundo.",
-  "Quando vejo um carro Stellantis, não vejo só tecnologia – vejo propósito.",
-  "Meu desejo é contribuir com essa transformação, com ideias, código e dedicação.",
-  "Não busco apenas um estágio. Busco um espaço onde posso crescer junto com algo grandioso.",
-  "E sei que combino com a Stellantis porque acredito no mesmo futuro que ela quer construir.",
-  "rafaela@stellantis:~/sonhos$ echo \"Quero fazer parte dessa jornada.\""
-];
-
 export default function MotivacaoStellantis() {
-  const [displayedLines, setDisplayedLines] = useState([]);
-  const [lineIndex, setLineIndex] = useState(0);
+  const [showText, setShowText] = useState(false);
 
   useEffect(() => {
-    if (lineIndex >= motivacao.length) return;
-
     const timeout = setTimeout(() => {
-      setDisplayedLines((prev) => [...prev, motivacao[lineIndex]]);
-      setLineIndex((prev) => prev + 1);
-    }, 2000);
-
+      setShowText(true);
+    }, 500);
     return () => clearTimeout(timeout);
-  }, [lineIndex]);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-black text-green-400 font-mono flex flex-col items-start justify-center p-8 bg-gradient-to-br from-black via-zinc-900 to-black">
-      {displayedLines.map((line, index) => (
-        <pre key={index} className="mb-2 text-left text-lg whitespace-pre-wrap">{line}</pre>
-      ))}
+    <div className="min-h-screen bg-black text-green-400 font-mono flex flex-col items-center justify-center p-8 text-center">
+      {showText && (
+        <>
+          <p className="text-lg max-w-4xl">
+            Desde que conheci a Stellantis, fui profundamente impactada por sua grandiosidade, propósito e visão de futuro. Não é apenas uma multinacional automotiva — é uma força propulsora de transformação social, ambiental e tecnológica. A capacidade da empresa de liderar a inovação em mobilidade inteligente, desenvolver veículos autônomos, aplicar inteligência artificial e investir em softwares embarcados é inspiradora para quem, como eu, respira tecnologia.
+            <br /><br />
+            Mas o que mais me atrai são os valores que conduzem cada projeto da Stellantis: sustentabilidade real, inclusão que vai além do discurso e um compromisso genuíno com a responsabilidade social. Ver uma empresa investir em energia limpa, economia circular, mobilidade acessível e ações sociais tangíveis faz com que eu me sinta em sintonia com seu propósito. Eu também acredito que inovação de verdade só acontece quando se pensa no coletivo — no planeta, nas pessoas, nas próximas gerações.
+            <br /><br />
+            Por isso, a Stellantis é mais que uma empresa dos meus sonhos: é um espelho da profissional que desejo ser. Contribuir com ideias, com meu código, com meu olhar curioso e com minha sede de evolução seria um privilégio — e uma aliança que promete crescimento mútuo. Quero somar forças com quem constrói o amanhã, e esse amanhã tem tudo a ver com a Stellantis.
+          </p>
           <div className="mt-6">
-        <a href="/" className="underline text-sm">← Voltar à página inicial</a>
-      </div>
+            <a href="/" className="underline text-sm">← Voltar à página inicial</a>
+          </div>
+        </>
+      )}
     </div>
   );
 }
