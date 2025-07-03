@@ -16,7 +16,7 @@ const lines = [
   "E na Engenharia de Software começei a me reinventar.",
   "Fiz estágio, projetos, códigos e documentação,",
   "Cada passo com propósito, com foco e dedicação.",
-  "Hoje sou Rafaela, criativa, curiosa, pronta pra evoluir,",
+  "Hoje essa Rafaela, criativa, curiosa, está pronta pra evoluir,",
   "E cada desafio que chega é mais uma chance de construir.",
   "Busco no estágio não só aprender, mas também contribuir,",
   "Com tudo que sou e o que ainda vou descobrir.",
@@ -33,7 +33,7 @@ const lines = [
   "Por isso, venho inteira — com verdade, paixão e vontade,",
   "Querendo viver a Stellantis com propósito e intensidade.",
   "rafaela@stellantis:~$ apply --to Stellantis",
-  "Processo iniciado com paixão, propósito e muito código 💻✨"
+  "Feito com paixão, propósito e muito código 💻✨"
 ];
 
 export default function TerminalPoem() {
@@ -104,7 +104,7 @@ export default function TerminalPoem() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-green-400 font-mono flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-black text-green-400 font-mono flex flex-col items-center justify-center p-6 relative">
       {!started ? (
         <div className="flex flex-col items-center space-y-6">
           <img src="/terminal-icon.png" alt="terminal icon" className="w-48 animate-pulse" />
@@ -112,34 +112,24 @@ export default function TerminalPoem() {
             onClick={handleStart}
             className="text-green-400 border border-green-400 px-6 py-3 rounded hover:bg-green-400 hover:text-black transition"
           >
-            Visualizar Poema
+            CLIQUE AQUI PARA VER O POEMA
           </button>
-          <div className="flex space-x-4">
-            <button
-              onClick={() => navigate('/sobre')}
-              className="text-green-400 border border-green-400 px-4 py-2 rounded hover:bg-green-400 hover:text-black transition"
-            >
-              Quem Sou Eu
-            </button>
-            <button
-              onClick={() => navigate('/stellantis')}
-              className="text-green-400 border border-green-400 px-4 py-2 rounded hover:bg-green-400 hover:text-black transition"
-            >
-              Por que Stellantis?
-            </button>
-          </div>
         </div>
       ) : (
         <>
-          {displayedLines.map((line, index) => (
-            <pre key={index} className="mb-1 w-full text-left whitespace-pre-wrap text-lg">{line}</pre>
-          ))}
-          <div className="space-x-4 mt-6">
+          <div className="w-full max-w-4xl">
+            {displayedLines.map((line, index) => (
+              <pre key={index} className="mb-1 text-left whitespace-pre-wrap text-lg">{line}</pre>
+            ))}
+          </div>
+
+          {/* Links laterais */}
+          <div className="absolute right-4 top-10 flex flex-col space-y-3 text-sm items-end">
             <a href="/sobre" className="underline">Sobre mim</a>
-            <a href="/motivacao" className="underline">Por que a Stellantis?</a>
+            <a href="/stellantis" className="underline">Por que a Stellantis?</a>
             <a href="https://github.com/RafaelaRibe1ro" target="_blank" className="underline">GitHub</a>
             <a href="https://www.linkedin.com/in/rafaela-ribeiro-5422061a5" target="_blank" className="underline">LinkedIn</a>
-            <a href="/Curriculo_Rafaela_Oliveira_Ribeiro.pdf" download className="underline">Download CV</a>
+            <a href="/" className="underline text-sm">← Voltar à página inicial</a>
           </div>
         </>
       )}
