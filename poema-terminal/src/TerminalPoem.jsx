@@ -33,7 +33,7 @@ const lines = [
   "Por isso, venho inteira — com verdade, paixão e vontade,",
   "Querendo viver a Stellantis com propósito e intensidade.",
   "rafaela@stellantis:~$ apply --to Stellantis",
-  "Feito com paixão, propósito e muito código 💻✨"
+  "Feito com paixão, propósito e muito código :)"
 ];
 
 export default function TerminalPoem() {
