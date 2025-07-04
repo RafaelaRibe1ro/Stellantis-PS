@@ -19,7 +19,7 @@ export default function MotivacaoStellantis() {
             <br /><br />
             Mas o que mais me atrai são os valores que conduzem cada projeto da Stellantis: sustentabilidade real, inclusão que vai além do discurso e um compromisso genuíno com a responsabilidade social. Ver uma empresa investir em energia limpa, economia circular, mobilidade acessível e ações sociais tangíveis faz com que eu me sinta em sintonia com seu propósito. Eu também acredito que inovação de verdade só acontece quando se pensa no coletivo — no planeta, nas pessoas, nas próximas gerações.
             <br /><br />
-            Por isso, a Stellantis é mais que uma empresa dos meus sonhos: é um espelho da profissional que desejo ser. Contribuir com ideias, com meu código, com meu olhar curioso e com minha sede de evolução seria um privilégio — e uma aliança que promete crescimento mútuo. Quero somar forças com quem constrói o amanhã, e esse amanhã tem tudo a ver com a Stellantis.
+            Por isso, a Stellantis é mais que uma empresa dos meus sonhos: é um espelho da profissional que desejo ser. Contribuir com ideias, com meu código, com meu olhar curioso e com minha sede de evolução seria um privilégio!
           </p>
           <div className="mt-6">
             <a href="/" className="underline text-sm">← Voltar à página inicial</a>
