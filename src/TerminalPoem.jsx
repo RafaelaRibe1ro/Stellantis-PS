@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const lines = [
   "rafaela@stellantis:~$ whoami",
@@ -38,24 +38,26 @@ const lines = [
 
 export default function TerminalPoem() {
   const [started, setStarted] = useState(false);
+  const [paused, setPaused] = useState(false);
   const [displayedLines, setDisplayedLines] = useState([]);
   const [lineIndex, setLineIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
+
   const audioContextRef = useRef(null);
   const gainNodeRef = useRef(null);
   const sourceRef = useRef(null);
-  const navigate = useNavigate();
+  const intervalRef = useRef(null);
 
   useEffect(() => {
-    if (!started || lineIndex >= lines.length) return;
+    if (!started || paused || lineIndex >= lines.length) return;
 
     const currentLine = lines[lineIndex];
 
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       if (charIndex < currentLine.length) {
         setDisplayedLines((prev) => {
           const updated = [...prev];
-          updated[lineIndex] = (updated[lineIndex] || '') + currentLine[charIndex];
+          updated[lineIndex] = (updated[lineIndex] || "") + currentLine[charIndex];
           return updated;
         });
         setCharIndex((prev) => prev + 1);
@@ -64,7 +66,7 @@ export default function TerminalPoem() {
           gainNodeRef.current.gain.setValueAtTime(0.5, audioContextRef.current.currentTime);
         }
       } else {
-        clearInterval(interval);
+        clearInterval(intervalRef.current);
         if (gainNodeRef.current && audioContextRef.current) {
           gainNodeRef.current.gain.setValueAtTime(0, audioContextRef.current.currentTime);
         }
@@ -75,20 +77,19 @@ export default function TerminalPoem() {
       }
     }, 35);
 
-    return () => clearInterval(interval);
-  }, [started, lineIndex, charIndex]);
+    return () => clearInterval(intervalRef.current);
+  }, [started, paused, lineIndex, charIndex]);
 
   const handleStart = async () => {
     setStarted(true);
-
-    // Exibe imediatamente a primeira letra da primeira linha
-    setDisplayedLines([lines[0][0]]);
-    setCharIndex(1);
+    setPaused(false);
+    setDisplayedLines(['']);
     setLineIndex(0);
+    setCharIndex(0);
 
     const context = new (window.AudioContext || window.webkitAudioContext)();
     const gainNode = context.createGain();
-    const response = await fetch('/typing-sound.mp3');
+    const response = await fetch(`${import.meta.env.BASE_URL}typing-sound.mp3`);
     const arrayBuffer = await response.arrayBuffer();
     const audioBuffer = await context.decodeAudioData(arrayBuffer);
     const source = context.createBufferSource();
@@ -103,36 +104,83 @@ export default function TerminalPoem() {
     sourceRef.current = source;
   };
 
-  return (
-    <div className="min-h-screen bg-black text-green-400 font-mono flex flex-col items-center justify-center p-6 relative">
-      {!started ? (
-        <div className="flex flex-col items-center space-y-6">
-          <img src="/terminal-icon.png" alt="terminal icon" className="w-48 animate-pulse" />
-          <button
-            onClick={handleStart}
-            className="text-green-400 border border-green-400 px-6 py-3 rounded hover:bg-green-400 hover:text-black transition"
-          >
-            CLIQUE AQUI PARA VER O POEMA
-          </button>
-        </div>
-      ) : (
-        <>
-          <div className="w-full max-w-4xl">
-            {displayedLines.map((line, index) => (
-              <pre key={index} className="mb-1 text-left whitespace-pre-wrap text-lg">{line}</pre>
-            ))}
-          </div>
+  useEffect(() => {
+    if (!started) {
+      handleStart();
+    }
+  }, []);
 
-          {/* Links laterais */}
-          <div className="absolute right-4 top-10 flex flex-col space-y-3 text-sm items-end">
-            <a href="/sobre" className="underline">Sobre mim</a>
-            <a href="/stellantis" className="underline">Por que a Stellantis?</a>
-            <a href="https://github.com/RafaelaRibe1ro" target="_blank" className="underline">GitHub</a>
-            <a href="https://www.linkedin.com/in/rafaela-ribeiro-5422061a5" target="_blank" className="underline">LinkedIn</a>
-            <a href="/" className="underline text-sm">← Voltar à página inicial</a>
-          </div>
-        </>
+  const handlePause = () => {
+    setPaused(true);
+    if (gainNodeRef.current && audioContextRef.current) {
+      gainNodeRef.current.gain.setValueAtTime(0, audioContextRef.current.currentTime);
+    }
+  };
+
+  const handleResume = () => {
+    setPaused(false);
+  };
+
+  const handleRestart = () => {
+    if (sourceRef.current) {
+      sourceRef.current.stop();
+      sourceRef.current.disconnect();
+      sourceRef.current = null;
+    }
+
+    if (audioContextRef.current) {
+      audioContextRef.current.close();
+      audioContextRef.current = null;
+    }
+
+    clearInterval(intervalRef.current);
+
+    setStarted(false);
+    setPaused(false);
+    setDisplayedLines([]);
+    setLineIndex(0);
+    setCharIndex(0);
+
+    handleStart();
+  };
+
+  useEffect(() => {
+    return () => {
+      if (sourceRef.current) sourceRef.current.stop();
+      if (audioContextRef.current) audioContextRef.current.close();
+      clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-black text-green-400 font-mono flex flex-col justify-between p-6">
+      
+      {/* Botões no topo centralizados */}
+      {started && (
+        <div className="flex justify-center mt-2 space-x-4">
+          <button onClick={handlePause} className="px-4 py-1 border border-green-400 hover:bg-green-400 hover:text-black rounded">Pausar</button>
+          <button onClick={handleResume} className="px-4 py-1 border border-green-400 hover:bg-green-400 hover:text-black rounded">Continuar</button>
+          <button onClick={handleRestart} className="px-4 py-1 border border-green-400 hover:bg-green-400 hover:text-black rounded">Reiniciar</button>
+        </div>
       )}
+
+      {/* Corpo do poema centralizado */}
+      <div className="flex-grow flex items-center justify-center">
+        <div className="w-full max-w-4xl">
+          {displayedLines.map((line, index) => (
+            <pre key={index} className="mb-1 text-left whitespace-pre-wrap text-lg">{line}</pre>
+          ))}
+        </div>
+      </div>
+
+      {/* Footer com links */}
+      <footer className="text-sm text-green-400 text-center space-x-6 mt-6">
+        <a href="https://github.com/RafaelaRibe1ro" target="_blank" className="underline">GitHub</a>
+        <a href="https://www.linkedin.com/in/rafaela-ribeiro-5422061a5" target="_blank" className="underline">LinkedIn</a>
+        <Link to="/sobre" className="underline">Sobre mim</Link>
+        <Link to="/stellantis" className="underline">Por que a Stellantis?</Link>
+        <Link to="/" className="underline">Voltar à página inicial</Link>
+      </footer>
     </div>
   );
 }

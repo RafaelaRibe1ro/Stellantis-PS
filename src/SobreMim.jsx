@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function SobreMim() {
   return (
@@ -17,7 +18,7 @@ export default function SobreMim() {
           Essas vivências me ensinaram mais do que linguagens de programação — me ensinaram a escutar, adaptar, construir em equipe e crescer com cada desafio. Hoje, trago comigo essa bagagem técnica, humana e criativa, pronta para contribuir com projetos que realmente façam a diferença.
         </p>
         <div className="mt-8">
-          <a href="/" className="underline text-sm">← Voltar à página inicial</a>
+          <Link to="/" className="underline text-sm">← Voltar à página inicial</Link>
         </div>
       </div>
     </div>
