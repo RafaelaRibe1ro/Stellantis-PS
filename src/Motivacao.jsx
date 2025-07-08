@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function MotivacaoStellantis() {
   const [showText, setShowText] = useState(false);
@@ -22,7 +23,7 @@ export default function MotivacaoStellantis() {
             Por isso, a Stellantis é mais que uma empresa dos meus sonhos: é um espelho da profissional que desejo ser. Contribuir com ideias, com meu código, com meu olhar curioso e com minha sede de evolução seria um privilégio!
           </p>
           <div className="mt-6">
-            <a href="/" className="underline text-sm">← Voltar à página inicial</a>
+            <Link to="/" className="underline text-sm">← Voltar à página inicial</Link>
           </div>
         </>
       )}
