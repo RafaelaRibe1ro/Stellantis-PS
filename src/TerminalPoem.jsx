@@ -179,7 +179,7 @@ export default function TerminalPoem() {
       {/* Footer */}
       <footer className="w-full py-6 border-t border-zinc-800 mt-10 text-sm text-center text-green-400 flex flex-col md:flex-row justify-center gap-6">
         <a href="https://github.com/RafaelaRibe1ro" target="_blank" className="hover:underline">GitHub</a>
-          <a href="https://linkedin.com/in/rafaela-ribeiro-5422061a5" target="_blank" className="hover:underline">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/rafaela-ribeiro-5422061a5/" target="_blank" className="hover:underline">LinkedIn</a>
         <Link to="/" className="hover:text-green-300 underline">← Voltar à página inicial</Link>
       </footer>
     </div>
