@@ -14,11 +14,11 @@ export default function Home() {
         to="/poema"
         className="text-green-400 border border-green-400 px-6 py-3 rounded hover:bg-green-400 hover:text-black transition"
       >
-        CLIQUE AQUI PARA VER O POEMA
+        VISUALIZAR MINHA APRESENTAÇÃO
       </Link>
       <Link
         to="/trajetoria"
-        className="text-green-400 border border-green-400 px-6 py-3 rounded hover:bg-green-400 hover:text-black transition"
+        className="mt-4 text-green-400 border border-green-400 px-6 py-3 rounded hover:bg-green-400 hover:text-black transition"
       >
         VISUALIZAR MINHA TRAJETÓRIA
       </Link>

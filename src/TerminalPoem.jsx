@@ -104,12 +104,6 @@ export default function TerminalPoem() {
     sourceRef.current = source;
   };
 
-  useEffect(() => {
-    if (!started) {
-      handleStart();
-    }
-  }, []);
-
   const handlePause = () => {
     setPaused(true);
     if (gainNodeRef.current && audioContextRef.current) {
@@ -140,8 +134,6 @@ export default function TerminalPoem() {
     setDisplayedLines([]);
     setLineIndex(0);
     setCharIndex(0);
-
-    handleStart();
   };
 
   useEffect(() => {
@@ -153,18 +145,29 @@ export default function TerminalPoem() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-green-400 font-mono flex flex-col justify-between p-6">
-      
-      {/* Botões no topo centralizados */}
-      {started && (
-        <div className="flex justify-center mt-2 space-x-4">
-          <button onClick={handlePause} className="px-4 py-1 border border-green-400 hover:bg-green-400 hover:text-black rounded">Pausar</button>
-          <button onClick={handleResume} className="px-4 py-1 border border-green-400 hover:bg-green-400 hover:text-black rounded">Continuar</button>
-          <button onClick={handleRestart} className="px-4 py-1 border border-green-400 hover:bg-green-400 hover:text-black rounded">Reiniciar</button>
+    <div className="min-h-screen bg-black text-green-400 font-mono flex flex-col p-6">
+      {/* Botão para iniciar o poema */}
+      {!started && (
+        <div className="flex justify-center mt-10">
+          <button
+            onClick={handleStart}
+            className="px-6 py-2 border border-green-400 text-green-400 hover:bg-green-400 hover:text-black rounded transition"
+          >
+            Iniciar Poema
+          </button>
         </div>
       )}
 
-      {/* Corpo do poema centralizado */}
+      {/* Botões de controle */}
+      {started && (
+        <div className="flex justify-center mt-4 space-x-4">
+          <button onClick={handlePause} className="px-4 py-2 border border-green-400 hover:bg-green-400 hover:text-black rounded">Pausar</button>
+          <button onClick={handleResume} className="px-4 py-2 border border-green-400 hover:bg-green-400 hover:text-black rounded">Continuar</button>
+          <button onClick={handleRestart} className="px-4 py-2 border border-green-400 hover:bg-green-400 hover:text-black rounded">Reiniciar</button>
+        </div>
+      )}
+
+      {/* Exibição do poema */}
       <div className="flex-grow flex items-center justify-center">
         <div className="w-full max-w-4xl">
           {displayedLines.map((line, index) => (
@@ -173,13 +176,11 @@ export default function TerminalPoem() {
         </div>
       </div>
 
-      {/* Footer com links */}
-      <footer className="text-sm text-green-400 text-center space-x-6 mt-6">
-        <a href="https://github.com/RafaelaRibe1ro" target="_blank" className="underline">GitHub</a>
-        <a href="https://www.linkedin.com/in/rafaela-ribeiro-5422061a5" target="_blank" className="underline">LinkedIn</a>
-        <Link to="/sobre" className="underline">Sobre mim</Link>
-        <Link to="/stellantis" className="underline">Por que a Stellantis?</Link>
-        <Link to="/" className="underline">Voltar à página inicial</Link>
+      {/* Footer */}
+      <footer className="w-full py-6 border-t border-zinc-800 mt-10 text-sm text-center text-green-400 flex flex-col md:flex-row justify-center gap-6">
+        <a href="https://github.com/RafaelaRibe1ro" target="_blank" className="hover:underline">GitHub</a>
+          <a href="https://linkedin.com/in/rafaela-ribeiro-5422061a5" target="_blank" className="hover:underline">LinkedIn</a>
+        <Link to="/" className="hover:text-green-300 underline">← Voltar à página inicial</Link>
       </footer>
     </div>
   );

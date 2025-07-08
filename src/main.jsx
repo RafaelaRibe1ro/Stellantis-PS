@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import TerminalPoem from './TerminalPoem';
-import SobreMim from './SobreMim';
 import MotivacaoStellantis from './Motivacao';
+import MinhaTrajetoria from './Tragetoria';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -13,7 +13,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/poema" element={<TerminalPoem />} />
-        <Route path="/sobre" element={<SobreMim />} />
         <Route path="/stellantis" element={<MotivacaoStellantis />} />
         <Route path="/trajetoria" element={<MinhaTrajetoria />} />
       </Routes>
