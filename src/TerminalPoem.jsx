@@ -16,7 +16,7 @@ const lines = [
   "E na Engenharia de Software começei a me reinventar.",
   "Fiz estágio, projetos, códigos e documentação,",
   "Cada passo com propósito, com foco e dedicação.",
-  "Hoje essa Rafaela, criativa, curiosa, está pronta pra evoluir,",
+  "Com paixão pelo novo, sigo pronta pra evoluir,",
   "E cada desafio que chega é mais uma chance de construir.",
   "Busco no estágio não só aprender, mas também contribuir,",
   "Com tudo que sou e o que ainda vou descobrir.",
