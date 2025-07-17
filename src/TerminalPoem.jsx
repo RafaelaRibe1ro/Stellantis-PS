@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 const lines = [
   "rafaela@stellantis:~$ whoami",
   "rafaela@stellantis:~$ poetry start",
+  "rafaela@stellantis:~$ init dream",
   "Do interior de Minas parti, com coragem no coração,",
   "Buscando sonhos maiores, segui minha vocação.",
   "Lá no Espírito Santo, a Engenharia de Petróleo me acolheu,",
@@ -13,10 +14,10 @@ const lines = [
   "Descobri na tecnologia uma paixão que fez sentido,",
   "Transformar ideias em soluções – esse é meu destino preferido.",
   "Voltei pra BH decidida, com garra no olhar,",
-  "E na Engenharia de Software começei a me reinventar.",
+  "E na Engenharia de Software, decidi me reinventar.",
   "Fiz estágio, projetos, códigos e documentação,",
-  "Cada passo com propósito, com foco e dedicação.",
-  "Hoje essa Rafaela, criativa, curiosa, está pronta pra evoluir,",
+  "Cada passo com propósito, foco e dedicação.",
+  "Com paixão pelo novo, sigo pronta pra evoluir,",
   "E cada desafio que chega é mais uma chance de construir.",
   "Busco no estágio não só aprender, mas também contribuir,",
   "Com tudo que sou e o que ainda vou descobrir.",
@@ -33,7 +34,9 @@ const lines = [
   "Por isso, venho inteira — com verdade, paixão e vontade,",
   "Querendo viver a Stellantis com propósito e intensidade.",
   "rafaela@stellantis:~$ apply --to Stellantis",
-  "Feito com paixão, propósito e muito código :)"
+  "rafaela@stellantis:~$ git commit -m 'feat: add poem about my journey'",
+  "rafaela@stellantis:~$ push origin rafaela",
+  "Feito com paixão, propósito e um pouco de código :)"
 ];
 
 export default function TerminalPoem() {
@@ -179,7 +182,7 @@ export default function TerminalPoem() {
       {/* Footer */}
       <footer className="w-full py-6 border-t border-zinc-800 mt-10 text-sm text-center text-green-400 flex flex-col md:flex-row justify-center gap-6">
         <a href="https://github.com/RafaelaRibe1ro" target="_blank" className="hover:underline">GitHub</a>
-          <a href="https://linkedin.com/in/rafaela-ribeiro-5422061a5" target="_blank" className="hover:underline">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/rafaela-ribeiro-5422061a5/" target="_blank" className="hover:underline">LinkedIn</a>
         <Link to="/" className="hover:text-green-300 underline">← Voltar à página inicial</Link>
       </footer>
     </div>
